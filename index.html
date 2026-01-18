@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ezeugochukwu - Business Intelligence Analyst Portfolio showcasing data analytics projects, dashboards, and insights">
+    <title>Ezeugochukwu | Business Intelligence Analyst</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <span class="nav__logo-icon">📊</span>
+                <span class="nav__logo-text">Ezeugochukwu</span>
+            </a>
+            
+            <ul class="nav__menu" id="nav-menu">
+                <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                <li class="nav__item"><a href="#projects" class="nav__link">Projects</a></li>
+                <li class="nav__item"><a href="#dashboard" class="nav__link">Dashboard</a></li>
+                <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+            </ul>
+            
+            <div class="nav__actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="theme-toggle__icon theme-toggle__icon--light">☀️</span>
+                    <span class="theme-toggle__icon theme-toggle__icon--dark">🌙</span>
+                </button>
+                <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                    <span class="nav__toggle-line"></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero__background">
+                <div class="hero__particles" id="particles"></div>
+            </div>
+            <div class="hero__content container">
+                <div class="hero__text animate-on-scroll" data-animation="fade-up">
+                    <span class="hero__greeting">Hello, I'm</span>
+                    <h1 class="hero__title">Ezeugochukwu</h1>
+                    <h2 class="hero__subtitle">Business Intelligence Analyst</h2>
+                    <p class="hero__description">
+                        Transforming complex data into actionable insights. 
+                        I specialize in creating compelling visualizations and dashboards 
+                        that drive business decisions.
+                    </p>
+                    <div class="hero__cta">
+                        <a href="#projects" class="btn btn--primary">View My Work</a>
+                        <a href="#contact" class="btn btn--outline">Get In Touch</a>
+                    </div>
+                </div>
+                <div class="hero__visual animate-on-scroll" data-animation="fade-left">
+                    <div class="hero__chart-container">
+                        <canvas id="heroChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <a href="#about" class="hero__scroll-indicator">
+                <span>Scroll Down</span>
+                <div class="hero__scroll-arrow"></div>
+            </a>
+        </section>
+
+        <!-- About Section -->
+        <section class="section about" id="about">
+            <div class="container">
+                <header class="section__header animate-on-scroll" data-animation="fade-up">
+                    <span class="section__tag">Get To Know</span>
+                    <h2 class="section__title">About Me</h2>
+                </header>
+                
+                <div class="about__content">
+                    <div class="about__image animate-on-scroll" data-animation="fade-right">
+                        <div class="about__image-wrapper">
+                            <div class="about__image-placeholder">
+                                <span class="about__image-icon">👨‍💼</span>
+                            </div>
+                            <div class="about__image-decoration"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="about__info animate-on-scroll" data-animation="fade-left">
+                        <div class="about__cards">
+                            <article class="about-card">
+                                <span class="about-card__icon">📈</span>
+                                <h3 class="about-card__title">Experience</h3>
+                                <p class="about-card__text">3+ Years in Data Analytics</p>
+                            </article>
+                            <article class="about-card">
+                                <span class="about-card__icon">🎯</span>
+                                <h3 class="about-card__title">Projects</h3>
+                                <p class="about-card__text">20+ Completed Projects</p>
+                            </article>
+                            <article class="about-card">
+                                <span class="about-card__icon">🏆</span>
+                                <h3 class="about-card__title">Certifications</h3>
+                                <p class="about-card__text">Microsoft & Google Certified</p>
+                            </article>
+                        </div>
+                        
+                        <p class="about__description">
+                            I am a passionate Business Intelligence Analyst with expertise in transforming 
+                            raw data into meaningful insights. With a strong foundation in SQL, Python, 
+                            and various BI tools, I help organizations make data-driven decisions that 
+                            impact their bottom line.
+                        </p>
+                        <p class="about__description">
+                            My approach combines technical expertise with business acumen, ensuring that 
+                            every analysis and visualization tells a compelling story that stakeholders 
+                            can understand and act upon.
+                        </p>
+                        
+                        <a href="#contact" class="btn btn--primary">Let's Connect</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section skills" id="skills">
+            <div class="container">
+                <header class="section__header animate-on-scroll" data-animation="fade-up">
+                    <span class="section__tag">My Expertise</span>
+                    <h2 class="section__title">Skills & Tools</h2>
+                </header>
+                
+                <div class="skills__content">
+                    <div class="skills__category animate-on-scroll" data-animation="fade-up">
+                        <h3 class="skills__category-title">Data Analysis</h3>
+                        <div class="skills__grid">
+                            <div class="skill-item">
+                                <div class="skill-item__icon">🗄️</div>
+                                <span class="skill-item__name">SQL</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-item__icon">🐍</div>
+                                <span class="skill-item__name">Python</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-item__icon">📊</div>
+                                <span class="skill-item__name">Excel</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-item__icon">📈</div>
+                                <span class="skill-item__name">Statistics</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skills__category animate-on-scroll" data-animation="fade-up" data-delay="100">
+                        <h3 class="skills__category-title">Visualization Tools</h3>
+                        <div class="skills__grid">
+                            <div class="skill-item">
+                                <div class="skill-item__icon">📊</div>
+                                <span class="skill-item__name">Power BI</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="92"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-item__icon">📉</div>
+                                <span class="skill-item__name">Tableau</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-item__icon">📋</div>
+                                <span class="skill-item__name">Looker</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-item__icon">📑</div>
+                                <span class="skill-item__name">Google Data Studio</span>
+                                <div class="skill-item__bar">
+                                    <div class="skill-item__progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skills__category animate-on-scroll" data-animation="fade-up" data-delay="200">
+                        <h3 class="skills__category-title">Other Tools</h3>
+                        <div class="skills__tags">
+                            <span class="skill-tag">ETL Processes</span>
+                            <span class="skill-tag">Data Warehousing</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Jupyter</span>
+                            <span class="skill-tag">DAX</span>
+                            <span class="skill-tag">Power Query</span>
+                            <span class="skill-tag">SSIS</span>
+                            <span class="skill-tag">R</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section projects" id="projects">
+            <div class="container">
+                <header class="section__header animate-on-scroll" data-animation="fade-up">
+                    <span class="section__tag">My Work</span>
+                    <h2 class="section__title">Featured Projects</h2>
+                </header>
+                
+                <div class="projects__filters animate-on-scroll" data-animation="fade-up">
+                    <button class="projects__filter active" data-filter="all">All</button>
+                    <button class="projects__filter" data-filter="dashboard">Dashboards</button>
+                    <button class="projects__filter" data-filter="analysis">Analysis</button>
+                    <button class="projects__filter" data-filter="visualization">Visualization</button>
+                </div>
+                
+                <div class="projects__grid">
+                    <article class="project-card animate-on-scroll" data-animation="fade-up" data-category="dashboard">
+                        <div class="project-card__image">
+                            <div class="project-card__placeholder">
+                                <canvas id="projectChart1" class="project-card__chart"></canvas>
+                            </div>
+                            <div class="project-card__overlay">
+                                <button class="project-card__btn" data-project="sales">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">Dashboard</span>
+                            <h3 class="project-card__title">Sales Performance Dashboard</h3>
+                            <p class="project-card__description">
+                                Comprehensive sales analytics dashboard tracking KPIs, revenue trends, 
+                                and regional performance.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="project-card__tag">Power BI</span>
+                                <span class="project-card__tag">SQL</span>
+                                <span class="project-card__tag">DAX</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="project-card animate-on-scroll" data-animation="fade-up" data-delay="100" data-category="analysis">
+                        <div class="project-card__image">
+                            <div class="project-card__placeholder">
+                                <canvas id="projectChart2" class="project-card__chart"></canvas>
+                            </div>
+                            <div class="project-card__overlay">
+                                <button class="project-card__btn" data-project="customer">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">Analysis</span>
+                            <h3 class="project-card__title">Customer Segmentation Analysis</h3>
+                            <p class="project-card__description">
+                                RFM analysis and customer clustering to identify high-value segments 
+                                and optimize marketing strategies.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="project-card__tag">Python</span>
+                                <span class="project-card__tag">Pandas</span>
+                                <span class="project-card__tag">Scikit-learn</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="project-card animate-on-scroll" data-animation="fade-up" data-delay="200" data-category="visualization">
+                        <div class="project-card__image">
+                            <div class="project-card__placeholder">
+                                <canvas id="projectChart3" class="project-card__chart"></canvas>
+                            </div>
+                            <div class="project-card__overlay">
+                                <button class="project-card__btn" data-project="market">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">Visualization</span>
+                            <h3 class="project-card__title">Market Trend Analysis</h3>
+                            <p class="project-card__description">
+                                Interactive visualization of market trends and competitive 
+                                landscape analysis for strategic planning.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="project-card__tag">Tableau</span>
+                                <span class="project-card__tag">SQL</span>
+                                <span class="project-card__tag">Excel</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="project-card animate-on-scroll" data-animation="fade-up" data-delay="300" data-category="dashboard">
+                        <div class="project-card__image">
+                            <div class="project-card__placeholder">
+                                <canvas id="projectChart4" class="project-card__chart"></canvas>
+                            </div>
+                            <div class="project-card__overlay">
+                                <button class="project-card__btn" data-project="financial">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-card__content">
+                            <span class="project-card__category">Dashboard</span>
+                            <h3 class="project-card__title">Financial Analytics Dashboard</h3>
+                            <p class="project-card__description">
+                                Real-time financial reporting dashboard with budget variance 
+                                analysis and forecasting capabilities.
+                            </p>
+                            <div class="project-card__tags">
+                                <span class="project-card__tag">Power BI</span>
+                                <span class="project-card__tag">Azure</span>
+                                <span class="project-card__tag">Python</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Dashboard Section -->
+        <section class="section dashboard" id="dashboard">
+            <div class="container">
+                <header class="section__header animate-on-scroll" data-animation="fade-up">
+                    <span class="section__tag">Live Demo</span>
+                    <h2 class="section__title">Customer Revenue Performance Dashboard</h2>
+                    <p class="section__description">
+                        An interactive demonstration of my dashboard design capabilities. 
+                        Explore the data by interacting with the charts and filters.
+                    </p>
+                </header>
+                
+                <div class="dashboard__container animate-on-scroll" data-animation="fade-up">
+                    <!-- Dashboard Header -->
+                    <div class="dashboard__header">
+                        <div class="dashboard__title-group">
+                            <h3 class="dashboard__title">Revenue Analytics</h3>
+                            <span class="dashboard__subtitle">FY 2025 Performance Overview</span>
+                        </div>
+                        <div class="dashboard__controls">
+                            <div class="dashboard__date-range">
+                                <label for="dateRange">Period:</label>
+                                <select id="dateRange" class="dashboard__select">
+                                    <option value="ytd">Year to Date</option>
+                                    <option value="q4">Q4 2025</option>
+                                    <option value="q3">Q3 2025</option>
+                                    <option value="q2">Q2 2025</option>
+                                    <option value="q1">Q1 2025</option>
+                                </select>
+                            </div>
+                            <button class="dashboard__refresh-btn" id="refreshDashboard">
+                                <span class="dashboard__refresh-icon">🔄</span>
+                                Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- KPI Cards -->
+                    <div class="dashboard__kpis">
+                        <div class="kpi-card kpi-card--revenue">
+                            <div class="kpi-card__icon">💰</div>
+                            <div class="kpi-card__content">
+                                <span class="kpi-card__label">Total Revenue</span>
+                                <span class="kpi-card__value" id="kpiRevenue">$2.4M</span>
+                                <span class="kpi-card__change kpi-card__change--positive">
+                                    <span class="kpi-card__arrow">↑</span> 12.5%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kpi-card kpi-card--customers">
+                            <div class="kpi-card__icon">👥</div>
+                            <div class="kpi-card__content">
+                                <span class="kpi-card__label">Total Customers</span>
+                                <span class="kpi-card__value" id="kpiCustomers">1,247</span>
+                                <span class="kpi-card__change kpi-card__change--positive">
+                                    <span class="kpi-card__arrow">↑</span> 8.3%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kpi-card kpi-card--orders">
+                            <div class="kpi-card__icon">📦</div>
+                            <div class="kpi-card__content">
+                                <span class="kpi-card__label">Total Orders</span>
+                                <span class="kpi-card__value" id="kpiOrders">3,892</span>
+                                <span class="kpi-card__change kpi-card__change--positive">
+                                    <span class="kpi-card__arrow">↑</span> 15.2%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="kpi-card kpi-card--avg">
+                            <div class="kpi-card__icon">📊</div>
+                            <div class="kpi-card__content">
+                                <span class="kpi-card__label">Avg Order Value</span>
+                                <span class="kpi-card__value" id="kpiAvg">$617</span>
+                                <span class="kpi-card__change kpi-card__change--negative">
+                                    <span class="kpi-card__arrow">↓</span> 2.1%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Charts Grid -->
+                    <div class="dashboard__charts">
+                        <div class="chart-card chart-card--large">
+                            <div class="chart-card__header">
+                                <h4 class="chart-card__title">Revenue Trend</h4>
+                                <div class="chart-card__actions">
+                                    <button class="chart-card__btn active" data-chart-type="line">Line</button>
+                                    <button class="chart-card__btn" data-chart-type="bar">Bar</button>
+                                </div>
+                            </div>
+                            <div class="chart-card__body">
+                                <canvas id="revenueTrendChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-card__header">
+                                <h4 class="chart-card__title">Revenue by Region</h4>
+                            </div>
+                            <div class="chart-card__body">
+                                <canvas id="regionChart"></canvas>
+                            </div>
+                            <div class="chart-card__legend" id="regionLegend"></div>
+                        </div>
+                        
+                        <div class="chart-card">
+                            <div class="chart-card__header">
+                                <h4 class="chart-card__title">Customer Segments</h4>
+                            </div>
+                            <div class="chart-card__body">
+                                <canvas id="segmentChart"></canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="chart-card chart-card--wide">
+                            <div class="chart-card__header">
+                                <h4 class="chart-card__title">Top Products by Revenue</h4>
+                            </div>
+                            <div class="chart-card__body">
+                                <canvas id="productsChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Table -->
+                    <div class="dashboard__table">
+                        <div class="table-card">
+                            <div class="table-card__header">
+                                <h4 class="table-card__title">Recent Transactions</h4>
+                                <div class="table-card__search">
+                                    <input type="text" placeholder="Search..." class="table-card__input" id="tableSearch">
+                                </div>
+                            </div>
+                            <div class="table-card__body">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="data-table__th" data-sort="id">Order ID</th>
+                                            <th class="data-table__th" data-sort="customer">Customer</th>
+                                            <th class="data-table__th" data-sort="product">Product</th>
+                                            <th class="data-table__th" data-sort="amount">Amount</th>
+                                            <th class="data-table__th" data-sort="status">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transactionTable">
+                                        <!-- Populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-card__footer">
+                                <span class="table-card__info">Showing <span id="tableCount">10</span> of <span id="tableTotal">50</span> entries</span>
+                                <div class="table-card__pagination" id="tablePagination">
+                                    <!-- Populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section contact" id="contact">
+            <div class="container">
+                <header class="section__header animate-on-scroll" data-animation="fade-up">
+                    <span class="section__tag">Get In Touch</span>
+                    <h2 class="section__title">Contact Me</h2>
+                    <p class="section__description">
+                        I'm always open to discussing new opportunities, 
+                        collaborations, or just having a chat about data analytics.
+                    </p>
+                </header>
+                
+                <div class="contact__content">
+                    <div class="contact__info animate-on-scroll" data-animation="fade-right">
+                        <div class="contact-card">
+                            <div class="contact-card__icon">📧</div>
+                            <h3 class="contact-card__title">Email</h3>
+                            <a href="mailto:ezeugochukwu@email.com" class="contact-card__link">
+                                ezeugochukwu@email.com
+                            </a>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-card__icon">📱</div>
+                            <h3 class="contact-card__title">Phone</h3>
+                            <a href="tel:+1234567890" class="contact-card__link">
+                                +1 (234) 567-890
+                            </a>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-card__icon">💼</div>
+                            <h3 class="contact-card__title">LinkedIn</h3>
+                            <a href="https://linkedin.com/in/ezeugochukwu" target="_blank" rel="noopener noreferrer" class="contact-card__link">
+                                linkedin.com/in/ezeugochukwu
+                            </a>
+                        </div>
+                        
+                        <div class="contact__social">
+                            <a href="https://linkedin.com/in/ezeugochukwu" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                                <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/ezeugochukwu" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                                <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                            <a href="mailto:ezeugochukwu@email.com" class="social-link" aria-label="Email">
+                                <svg class="social-link__icon" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <form class="contact__form animate-on-scroll" data-animation="fade-left" id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Your Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" placeholder="Project Inquiry">
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5" placeholder="Your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full">
+                            <span>Send Message</span>
+                            <span class="btn__icon">→</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <span class="footer__logo">📊 Ezeugochukwu</span>
+                    <p class="footer__tagline">Transforming Data Into Insights</p>
+                </div>
+                <div class="footer__links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer__copyright">
+                    <p>&copy; 2025 Ezeugochukwu. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal__overlay"></div>
+        <div class="modal__content">
+            <button class="modal__close" aria-label="Close modal">&times;</button>
+            <div class="modal__body" id="modalBody">
+                <!-- Content populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

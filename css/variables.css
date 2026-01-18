@@ -2,6 +2,12 @@
  * CSS Custom Properties (Variables)
  * Following SMACSS methodology - Base layer
  * Centralized design tokens for maintainability
+ * 
+ * Color Palette (Don Norman's Design Principles Applied):
+ * - #222222: Dark charcoal - High contrast text, dark mode base
+ * - #FA8112: Vibrant orange - Primary action color (Affordance & Signifiers)
+ * - #F5E7C6: Warm cream - Secondary backgrounds (Visibility hierarchy)
+ * - #FAF3E1: Light cream - Primary light background (Reduces eye strain)
  */
 
 :root {
@@ -9,53 +15,53 @@
        COLOR SYSTEM
        ============================================ */
     
-    /* Primary Colors */
-    --color-primary-50: #eff6ff;
-    --color-primary-100: #dbeafe;
-    --color-primary-200: #bfdbfe;
-    --color-primary-300: #93c5fd;
-    --color-primary-400: #60a5fa;
-    --color-primary-500: #3b82f6;
-    --color-primary-600: #2563eb;
-    --color-primary-700: #1d4ed8;
-    --color-primary-800: #1e40af;
-    --color-primary-900: #1e3a8a;
+    /* Primary Colors - Orange spectrum for actions (Signifiers) */
+    --color-primary-50: #FFF7ED;
+    --color-primary-100: #FFEDD5;
+    --color-primary-200: #FED7AA;
+    --color-primary-300: #FDBA74;
+    --color-primary-400: #FB923C;
+    --color-primary-500: #FA8112;  /* Main brand orange */
+    --color-primary-600: #EA580C;
+    --color-primary-700: #C2410C;
+    --color-primary-800: #9A3412;
+    --color-primary-900: #7C2D12;
     
-    /* Secondary Colors */
-    --color-secondary-50: #f0fdf4;
-    --color-secondary-100: #dcfce7;
-    --color-secondary-200: #bbf7d0;
-    --color-secondary-300: #86efac;
-    --color-secondary-400: #4ade80;
-    --color-secondary-500: #22c55e;
-    --color-secondary-600: #16a34a;
-    --color-secondary-700: #15803d;
-    --color-secondary-800: #166534;
-    --color-secondary-900: #14532d;
+    /* Secondary Colors - Warm earth tones (Consistency) */
+    --color-secondary-50: #FEFDF8;
+    --color-secondary-100: #FAF3E1;  /* Light cream */
+    --color-secondary-200: #F5E7C6;  /* Warm cream */
+    --color-secondary-300: #E8D5A3;
+    --color-secondary-400: #D4B978;
+    --color-secondary-500: #B8944D;
+    --color-secondary-600: #96723A;
+    --color-secondary-700: #745530;
+    --color-secondary-800: #5C4428;
+    --color-secondary-900: #4A3721;
     
-    /* Accent Colors */
-    --color-accent-purple: #8b5cf6;
-    --color-accent-pink: #ec4899;
-    --color-accent-orange: #f97316;
-    --color-accent-cyan: #06b6d4;
+    /* Accent Colors - Complementary palette */
+    --color-accent-purple: #7C3AED;
+    --color-accent-pink: #DB2777;
+    --color-accent-orange: #FA8112;
+    --color-accent-cyan: #0891B2;
     
-    /* Neutral Colors */
-    --color-gray-50: #f9fafb;
-    --color-gray-100: #f3f4f6;
-    --color-gray-200: #e5e7eb;
-    --color-gray-300: #d1d5db;
-    --color-gray-400: #9ca3af;
-    --color-gray-500: #6b7280;
-    --color-gray-600: #4b5563;
-    --color-gray-700: #374151;
-    --color-gray-800: #1f2937;
-    --color-gray-900: #111827;
+    /* Neutral Colors - Based on #222222 (Visibility & Contrast) */
+    --color-gray-50: #FAF3E1;   /* Light cream */
+    --color-gray-100: #F5E7C6;  /* Warm cream */
+    --color-gray-200: #E8DCC4;
+    --color-gray-300: #D4CAB2;
+    --color-gray-400: #A09080;
+    --color-gray-500: #6B5D4D;
+    --color-gray-600: #4A4139;
+    --color-gray-700: #363029;
+    --color-gray-800: #2A2520;
+    --color-gray-900: #222222;  /* Dark charcoal */
     
-    /* Semantic Colors */
-    --color-success: #22c55e;
-    --color-warning: #f59e0b;
-    --color-error: #ef4444;
-    --color-info: #3b82f6;
+    /* Semantic Colors - Clear feedback (Feedback principle) */
+    --color-success: #16A34A;
+    --color-warning: #FA8112;
+    --color-error: #DC2626;
+    --color-info: #0891B2;
     
     /* ============================================
        TYPOGRAPHY
@@ -196,82 +202,94 @@
 
 /* ============================================
    LIGHT THEME (Default)
+   Applying Don Norman's Visibility principle:
+   - High contrast for readability
+   - Clear visual hierarchy
+   - Warm, inviting palette reduces cognitive load
    ============================================ */
 [data-theme="light"] {
-    --bg-primary: #ffffff;
-    --bg-secondary: var(--color-gray-50);
-    --bg-tertiary: var(--color-gray-100);
-    --bg-card: #ffffff;
-    --bg-overlay: rgba(0, 0, 0, 0.5);
+    --bg-primary: #FAF3E1;           /* Light cream - easy on eyes */
+    --bg-secondary: #F5E7C6;         /* Warm cream - section differentiation */
+    --bg-tertiary: #E8DCC4;          /* Slightly darker for depth */
+    --bg-card: #FFFCF5;              /* Near white for cards - Visibility */
+    --bg-overlay: rgba(34, 34, 34, 0.6);
     
-    --text-primary: var(--color-gray-900);
-    --text-secondary: var(--color-gray-600);
-    --text-muted: var(--color-gray-400);
-    --text-inverse: #ffffff;
+    --text-primary: #222222;         /* Dark charcoal - maximum readability */
+    --text-secondary: #4A4139;       /* Softer dark - secondary info */
+    --text-muted: #6B5D4D;           /* Muted for tertiary content */
+    --text-inverse: #FAF3E1;
     
-    --border-color: var(--color-gray-200);
-    --border-color-light: var(--color-gray-100);
+    --border-color: #E8DCC4;
+    --border-color-light: #F5E7C6;
     
-    --link-color: var(--color-primary-600);
-    --link-hover: var(--color-primary-700);
+    /* Links - Clear affordance for clickability */
+    --link-color: #C2410C;
+    --link-hover: #FA8112;
     
-    --button-primary-bg: var(--color-primary-600);
-    --button-primary-text: #ffffff;
-    --button-primary-hover: var(--color-primary-700);
+    /* Buttons - Strong signifiers for actions (Affordance) */
+    --button-primary-bg: #FA8112;    /* Vibrant orange - calls attention */
+    --button-primary-text: #FFFCF5;
+    --button-primary-hover: #EA580C; /* Darker on hover - Feedback */
     
-    --input-bg: #ffffff;
-    --input-border: var(--color-gray-300);
-    --input-focus: var(--color-primary-500);
+    --input-bg: #FFFCF5;
+    --input-border: #D4CAB2;
+    --input-focus: #FA8112;          /* Orange focus - Feedback principle */
     
-    --header-bg: rgba(255, 255, 255, 0.9);
-    --header-border: var(--color-gray-200);
+    --header-bg: rgba(250, 243, 225, 0.95);
+    --header-border: #E8DCC4;
     
-    --card-shadow: var(--shadow-md);
-    --card-shadow-hover: var(--shadow-xl);
+    --card-shadow: 0 4px 6px -1px rgb(34 34 34 / 0.08), 0 2px 4px -2px rgb(34 34 34 / 0.06);
+    --card-shadow-hover: 0 20px 25px -5px rgb(34 34 34 / 0.12), 0 8px 10px -6px rgb(34 34 34 / 0.08);
     
     /* Dashboard specific */
-    --dashboard-bg: var(--color-gray-50);
-    --chart-grid: var(--color-gray-200);
-    --chart-text: var(--color-gray-600);
+    --dashboard-bg: #F5E7C6;
+    --chart-grid: #E8DCC4;
+    --chart-text: #4A4139;
 }
 
 /* ============================================
    DARK THEME
+   Applying Mapping principle:
+   - Consistent color meanings across themes
+   - Orange remains the action color
+   - Smooth transition maintains user's mental model
    ============================================ */
 [data-theme="dark"] {
-    --bg-primary: var(--color-gray-900);
-    --bg-secondary: var(--color-gray-800);
-    --bg-tertiary: var(--color-gray-700);
-    --bg-card: var(--color-gray-800);
-    --bg-overlay: rgba(0, 0, 0, 0.7);
+    --bg-primary: #222222;           /* Dark charcoal base */
+    --bg-secondary: #2A2520;         /* Slightly warm dark */
+    --bg-tertiary: #363029;          /* Elevated surfaces */
+    --bg-card: #2A2520;
+    --bg-overlay: rgba(0, 0, 0, 0.75);
     
-    --text-primary: var(--color-gray-100);
-    --text-secondary: var(--color-gray-400);
-    --text-muted: var(--color-gray-500);
-    --text-inverse: var(--color-gray-900);
+    --text-primary: #FAF3E1;         /* Light cream text */
+    --text-secondary: #D4CAB2;       /* Warm gray */
+    --text-muted: #A09080;           /* Muted warm */
+    --text-inverse: #222222;
     
-    --border-color: var(--color-gray-700);
-    --border-color-light: var(--color-gray-800);
+    --border-color: #4A4139;
+    --border-color-light: #363029;
     
-    --link-color: var(--color-primary-400);
-    --link-hover: var(--color-primary-300);
+    /* Links maintain orange family - Consistency */
+    --link-color: #FB923C;
+    --link-hover: #FA8112;
     
-    --button-primary-bg: var(--color-primary-500);
-    --button-primary-text: #ffffff;
-    --button-primary-hover: var(--color-primary-400);
+    /* Buttons - Same orange action color - Mapping */
+    --button-primary-bg: #FA8112;
+    --button-primary-text: #222222;
+    --button-primary-hover: #FB923C;
     
-    --input-bg: var(--color-gray-800);
-    --input-border: var(--color-gray-600);
-    --input-focus: var(--color-primary-400);
+    --input-bg: #363029;
+    --input-border: #4A4139;
+    --input-focus: #FA8112;
     
-    --header-bg: rgba(17, 24, 39, 0.95);
-    --header-border: var(--color-gray-700);
+    --header-bg: rgba(34, 34, 34, 0.95);
+    --header-border: #363029;
     
-    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-    --card-shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --card-shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
     
     /* Dashboard specific */
-    --dashboard-bg: var(--color-gray-800);
-    --chart-grid: var(--color-gray-600);
-    --chart-text: var(--color-gray-400);
+    --dashboard-bg: #2A2520;
+    --chart-grid: #4A4139;
+    --chart-text: #D4CAB2;
 }

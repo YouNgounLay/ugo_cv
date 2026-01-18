@@ -1,7 +1,28 @@
 /**
  * Animation Styles
  * Scroll-based and interaction animations
+ * Optimized for performance with GPU acceleration hints
  */
+
+/* ============================================
+   PERFORMANCE HINTS
+   ============================================ */
+
+/* GPU-accelerated animations container */
+.animate-on-scroll,
+.particle,
+.floating,
+.hover-lift,
+.hover-scale {
+    /* Promote to composite layer for better performance */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Content containment for better rendering */
+section {
+    contain: layout style;
+}
 
 /* ============================================
    SCROLL ANIMATIONS - Initial States
@@ -10,6 +31,8 @@
 .animate-on-scroll {
     opacity: 0;
     transition: opacity 0.6s ease, transform 0.6s ease;
+    /* Hint browser about upcoming changes */
+    will-change: opacity, transform;
 }
 
 /* Fade Up */
@@ -20,6 +43,8 @@
 .animate-on-scroll[data-animation="fade-up"].animated {
     opacity: 1;
     transform: translateY(0);
+    /* Remove will-change after animation completes */
+    will-change: auto;
 }
 
 /* Fade Down */
@@ -30,6 +55,7 @@
 .animate-on-scroll[data-animation="fade-down"].animated {
     opacity: 1;
     transform: translateY(0);
+    will-change: auto;
 }
 
 /* Fade Left */
@@ -40,6 +66,7 @@
 .animate-on-scroll[data-animation="fade-left"].animated {
     opacity: 1;
     transform: translateX(0);
+    will-change: auto;
 }
 
 /* Fade Right */
@@ -50,6 +77,7 @@
 .animate-on-scroll[data-animation="fade-right"].animated {
     opacity: 1;
     transform: translateX(0);
+    will-change: auto;
 }
 
 /* Scale Up */
@@ -60,6 +88,7 @@
 .animate-on-scroll[data-animation="scale-up"].animated {
     opacity: 1;
     transform: scale(1);
+    will-change: auto;
 }
 
 /* Animation Delays */

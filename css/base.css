@@ -24,6 +24,18 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 body {
     font-family: var(--font-primary);
     font-size: var(--text-base);
@@ -33,6 +45,8 @@ body {
     background-color: var(--bg-primary);
     min-height: 100vh;
     transition: background-color var(--transition-base), color var(--transition-base);
+    /* Prevent layout shifts from scrollbar appearance */
+    overflow-x: hidden;
 }
 
 /* ============================================
@@ -148,7 +162,7 @@ hr {
 
 ::selection {
     background-color: var(--color-primary-500);
-    color: #ffffff;
+    color: #FAF3E1;
 }
 
 /* Custom scrollbar */

@@ -147,10 +147,10 @@ const DashboardManager = (function() {
             btn.addEventListener('click', handleChartTypeToggle);
         });
         
-        // Table search
+        // Table search - use shared Utils.debounce
         const searchInput = document.getElementById('tableSearch');
         if (searchInput) {
-            searchInput.addEventListener('input', debounce(handleSearch, 300));
+            searchInput.addEventListener('input', Utils.debounce(handleSearch, 300));
         }
         
         // Table sorting
@@ -620,17 +620,16 @@ const DashboardManager = (function() {
             const labels = [...state.charts.revenueTrend.data.labels];
             const dataValues = [...state.charts.revenueTrend.data.datasets[0].data];
             
-            // Get canvas element before destroying the chart
-            const canvas = document.getElementById('revenueTrendChart');
-            if (!canvas) return;
-            
-            // Destroy old chart and clear canvas
+            // Destroy old chart first
             state.charts.revenueTrend.destroy();
             state.charts.revenueTrend = null;
             
-            // Clear the canvas context to ensure clean state
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Also remove from ChartManager
+            ChartManager.destroyChart('revenueTrend');
+            
+            // Get canvas element after destroying the chart
+            const canvas = document.getElementById('revenueTrendChart');
+            if (!canvas) return;
             
             // Prepare dataset based on chart type
             const dataset = {
@@ -654,65 +653,67 @@ const DashboardManager = (function() {
                 dataset.tension = 0.4;
             }
             
-            // Create new chart with new type
-            state.charts.revenueTrend = new Chart(canvas, {
-                type: chartType,
-                data: {
-                    labels: labels,
-                    datasets: [dataset]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        intersect: false,
-                        mode: 'index'
+            // Create new chart with new type (use requestAnimationFrame to ensure canvas is ready)
+            requestAnimationFrame(() => {
+                state.charts.revenueTrend = new Chart(canvas, {
+                    type: chartType,
+                    data: {
+                        labels: labels,
+                        datasets: [dataset]
                     },
-                    scales: {
-                        x: {
-                            grid: {
-                                color: themeColors.gridColor,
-                                drawBorder: false
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        },
+                        scales: {
+                            x: {
+                                grid: {
+                                    color: themeColors.gridColor,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    color: themeColors.textColor
+                                }
                             },
-                            ticks: {
-                                color: themeColors.textColor
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: themeColors.gridColor,
+                                    drawBorder: false
+                                },
+                                ticks: {
+                                    color: themeColors.textColor,
+                                    callback: value => `$${value}K`
+                                }
                             }
                         },
-                        y: {
-                            beginAtZero: true,
-                            grid: {
-                                color: themeColors.gridColor,
-                                drawBorder: false
+                        plugins: {
+                            legend: {
+                                display: false
                             },
-                            ticks: {
-                                color: themeColors.textColor,
-                                callback: value => `$${value}K`
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: themeColors.backgroundColor,
-                            titleColor: themeColors.textColor,
-                            bodyColor: themeColors.textColor,
-                            borderColor: themeColors.gridColor,
-                            borderWidth: 1,
-                            displayColors: false,
-                            callbacks: {
-                                label: context => `Revenue: $${context.parsed.y}K`
+                            tooltip: {
+                                backgroundColor: themeColors.backgroundColor,
+                                titleColor: themeColors.textColor,
+                                bodyColor: themeColors.textColor,
+                                borderColor: themeColors.gridColor,
+                                borderWidth: 1,
+                                displayColors: false,
+                                callbacks: {
+                                    label: context => `Revenue: $${context.parsed.y}K`
+                                }
                             }
                         }
                     }
-                }
+                });
+                
+                ChartManager.addChart('revenueTrend', state.charts.revenueTrend);
             });
-            
-            ChartManager.addChart('revenueTrend', state.charts.revenueTrend);
         }
     }
-    
+
     /**
      * Update all charts
      */
@@ -945,17 +946,6 @@ const DashboardManager = (function() {
     function showProductDetails(product) {
         console.log(`Product clicked: ${product}`);
         // Could open a modal with detailed product data
-    }
-    
-    /**
-     * Debounce utility
-     */
-    function debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
     }
     
     // Public API

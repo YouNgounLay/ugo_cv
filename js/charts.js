@@ -1,6 +1,7 @@
 /**
  * Charts Module
  * Handles all Chart.js chart creation and management
+ * Colors aligned with brand palette for visual consistency
  */
 
 const ChartManager = (function() {
@@ -9,15 +10,17 @@ const ChartManager = (function() {
     // Store chart instances
     const charts = {};
     
-    // Chart colors
+    // Chart colors - Brand aligned palette
     const colors = {
-        primary: '#3b82f6',
-        secondary: '#22c55e',
-        accent: '#8b5cf6',
-        orange: '#f97316',
-        cyan: '#06b6d4',
-        pink: '#ec4899',
-        gray: '#6b7280'
+        primary: '#FA8112',    // Vibrant orange - main brand color
+        secondary: '#16A34A',  // Success green
+        accent: '#7C3AED',     // Purple accent
+        orange: '#EA580C',     // Darker orange variant
+        cyan: '#0891B2',       // Teal/cyan
+        pink: '#DB2777',       // Pink accent
+        gray: '#6B5D4D',       // Warm gray
+        cream: '#F5E7C6',      // Warm cream
+        dark: '#222222'        // Dark charcoal
     };
     
     // Get theme-aware colors
@@ -25,25 +28,56 @@ const ChartManager = (function() {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
         
         return {
-            textColor: isDark ? '#9ca3af' : '#4b5563',
-            gridColor: isDark ? '#374151' : '#e5e7eb',
-            backgroundColor: isDark ? '#1f2937' : '#ffffff'
+            textColor: isDark ? '#D4CAB2' : '#4A4139',
+            gridColor: isDark ? '#4A4139' : '#E8DCC4',
+            backgroundColor: isDark ? '#2A2520' : '#FFFCF5'
         };
     }
     
     /**
      * Initialize all charts
+     * Uses Intersection Observer for lazy initialization
      */
     function init() {
         // Set global Chart.js defaults
         setChartDefaults();
         
-        // Initialize charts
+        // Initialize hero chart immediately (above the fold)
         initHeroChart();
-        initProjectCharts();
+        
+        // Lazy load project charts when visible
+        lazyInitProjectCharts();
         
         // Listen for theme changes
         window.addEventListener('themeChange', updateTheme);
+    }
+    
+    /**
+     * Lazy initialize project charts when they become visible
+     */
+    function lazyInitProjectCharts() {
+        const projectSection = document.getElementById('projects');
+        if (!projectSection) {
+            // Fallback: init immediately if section not found
+            initProjectCharts();
+            return;
+        }
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Use requestIdleCallback for non-blocking init
+                    if ('requestIdleCallback' in window) {
+                        requestIdleCallback(() => initProjectCharts(), { timeout: 1000 });
+                    } else {
+                        setTimeout(initProjectCharts, 100);
+                    }
+                    observer.disconnect();
+                }
+            });
+        }, { rootMargin: '100px 0px' });
+        
+        observer.observe(projectSection);
     }
     
     /**
@@ -57,10 +91,19 @@ const ChartManager = (function() {
         Chart.defaults.responsive = true;
         Chart.defaults.maintainAspectRatio = false;
         
-        // Animation defaults
+        // Reduced animation duration for better performance
         Chart.defaults.animation = {
-            duration: 1000,
+            duration: 750,
             easing: 'easeOutQuart'
+        };
+        
+        // Disable animations on resize for better performance
+        Chart.defaults.transitions = {
+            resize: {
+                animation: {
+                    duration: 0
+                }
+            }
         };
     }
     

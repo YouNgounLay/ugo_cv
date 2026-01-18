@@ -38,9 +38,9 @@ const NavigationManager = (function() {
      * Bind all event listeners
      */
     function bindEvents() {
-        // Scroll events
-        window.addEventListener('scroll', throttle(handleScroll, 100));
-        window.addEventListener('scroll', throttle(setActiveLink, 100));
+        // Scroll events - use shared Utils for throttle/debounce
+        window.addEventListener('scroll', Utils.throttle(handleScroll, 100), { passive: true });
+        window.addEventListener('scroll', Utils.throttle(setActiveLink, 100), { passive: true });
         
         // Mobile menu toggle
         if (navToggle) {
@@ -58,8 +58,8 @@ const NavigationManager = (function() {
         // Close menu on escape key
         document.addEventListener('keydown', handleKeyDown);
         
-        // Handle resize
-        window.addEventListener('resize', debounce(handleResize, 250));
+        // Handle resize - use shared Utils
+        window.addEventListener('resize', Utils.debounce(handleResize, 250), { passive: true });
     }
     
     /**
@@ -200,37 +200,6 @@ const NavigationManager = (function() {
         if (window.innerWidth > 768 && isMenuOpen) {
             closeMenu();
         }
-    }
-    
-    /**
-     * Throttle function execution
-     * @param {Function} func
-     * @param {number} limit
-     * @returns {Function}
-     */
-    function throttle(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    }
-    
-    /**
-     * Debounce function execution
-     * @param {Function} func
-     * @param {number} wait
-     * @returns {Function}
-     */
-    function debounce(func, wait) {
-        let timeout;
-        return function(...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), wait);
-        };
     }
     
     // Public API

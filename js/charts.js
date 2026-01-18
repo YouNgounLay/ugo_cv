@@ -211,13 +211,18 @@ const ChartManager = (function() {
         const ctx = document.getElementById('projectChart3');
         if (!ctx) return;
         
+        const data = [12, 19, 15, 25];
+        const total = data.reduce((a, b) => a + b, 0);
+        const percentages = data.map(v => ((v / total) * 100).toFixed(0));
+        const themeColors = getThemeColors();
+        
         charts.project3 = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Q1', 'Q2', 'Q3', 'Q4'],
                 datasets: [{
                     label: 'Revenue',
-                    data: [12, 19, 15, 25],
+                    data: data,
                     backgroundColor: [
                         colors.primary,
                         colors.secondary,
@@ -230,12 +235,36 @@ const ChartManager = (function() {
             options: {
                 scales: {
                     x: { display: false },
-                    y: { display: false }
+                    y: { display: false, max: Math.max(...data) * 1.25 }
                 },
                 plugins: {
-                    legend: { display: false }
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: context => ` ${context.parsed.y}K (${percentages[context.dataIndex]}%)`
+                        }
+                    }
                 }
-            }
+            },
+            plugins: [{
+                id: 'percentageLabels',
+                afterDatasetsDraw: (chart) => {
+                    const ctx = chart.ctx;
+                    chart.data.datasets.forEach((dataset, datasetIndex) => {
+                        const meta = chart.getDatasetMeta(datasetIndex);
+                        meta.data.forEach((bar, index) => {
+                            const percent = percentages[index];
+                            ctx.save();
+                            ctx.fillStyle = themeColors.textColor;
+                            ctx.font = 'bold 11px Inter, sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+                            ctx.fillText(`${percent}%`, bar.x, bar.y - 5);
+                            ctx.restore();
+                        });
+                    });
+                }
+            }]
         });
     }
     

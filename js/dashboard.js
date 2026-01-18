@@ -409,6 +409,8 @@ const DashboardManager = (function() {
         if (!ctx) return;
         
         const themeColors = ChartManager.getThemeColors();
+        const total = productsData.values.reduce((a, b) => a + b, 0);
+        const percentages = productsData.values.map(v => ((v / total) * 100).toFixed(1));
         
         state.charts.products = new Chart(ctx, {
             type: 'bar',
@@ -435,6 +437,7 @@ const DashboardManager = (function() {
                 scales: {
                     x: {
                         beginAtZero: true,
+                        max: Math.max(...productsData.values) * 1.15,
                         grid: {
                             color: themeColors.gridColor,
                             drawBorder: false
@@ -464,7 +467,7 @@ const DashboardManager = (function() {
                         borderColor: themeColors.gridColor,
                         borderWidth: 1,
                         callbacks: {
-                            label: context => ` Revenue: $${context.parsed.x}K`
+                            label: context => ` Revenue: $${context.parsed.x}K (${percentages[context.dataIndex]}%)`
                         }
                     }
                 },
@@ -474,7 +477,27 @@ const DashboardManager = (function() {
                         showProductDetails(productsData.labels[index]);
                     }
                 }
-            }
+            },
+            plugins: [{
+                id: 'percentageLabels',
+                afterDatasetsDraw: (chart) => {
+                    const ctx = chart.ctx;
+                    chart.data.datasets.forEach((dataset, datasetIndex) => {
+                        const meta = chart.getDatasetMeta(datasetIndex);
+                        meta.data.forEach((bar, index) => {
+                            const value = dataset.data[index];
+                            const percent = percentages[index];
+                            ctx.save();
+                            ctx.fillStyle = themeColors.textColor;
+                            ctx.font = '600 12px Inter, sans-serif';
+                            ctx.textAlign = 'left';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(`${percent}%`, bar.x + 8, bar.y);
+                            ctx.restore();
+                        });
+                    });
+                }
+            }]
         });
         
         ChartManager.addChart('products', state.charts.products);
@@ -589,10 +612,104 @@ const DashboardManager = (function() {
         });
         btn.classList.add('active');
         
-        // Update chart type
+        // Destroy and recreate chart with new type
         if (state.charts.revenueTrend) {
-            state.charts.revenueTrend.config.type = chartType;
-            state.charts.revenueTrend.update();
+            const themeColors = ChartManager.getThemeColors();
+            
+            // Get current data (make a copy)
+            const labels = [...state.charts.revenueTrend.data.labels];
+            const dataValues = [...state.charts.revenueTrend.data.datasets[0].data];
+            
+            // Get canvas element before destroying the chart
+            const canvas = document.getElementById('revenueTrendChart');
+            if (!canvas) return;
+            
+            // Destroy old chart and clear canvas
+            state.charts.revenueTrend.destroy();
+            state.charts.revenueTrend = null;
+            
+            // Clear the canvas context to ensure clean state
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Prepare dataset based on chart type
+            const dataset = {
+                label: 'Revenue ($K)',
+                data: dataValues,
+                borderColor: ChartManager.colors.primary,
+                pointBackgroundColor: ChartManager.colors.primary,
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: chartType === 'line' ? 4 : 0,
+                pointHoverRadius: chartType === 'line' ? 6 : 0
+            };
+            
+            if (chartType === 'bar') {
+                dataset.backgroundColor = ChartManager.colors.primary;
+                dataset.borderRadius = 6;
+                dataset.fill = false;
+            } else {
+                dataset.backgroundColor = 'rgba(59, 130, 246, 0.1)';
+                dataset.fill = true;
+                dataset.tension = 0.4;
+            }
+            
+            // Create new chart with new type
+            state.charts.revenueTrend = new Chart(canvas, {
+                type: chartType,
+                data: {
+                    labels: labels,
+                    datasets: [dataset]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: themeColors.gridColor,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: themeColors.textColor
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: themeColors.gridColor,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: themeColors.textColor,
+                                callback: value => `$${value}K`
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: themeColors.backgroundColor,
+                            titleColor: themeColors.textColor,
+                            bodyColor: themeColors.textColor,
+                            borderColor: themeColors.gridColor,
+                            borderWidth: 1,
+                            displayColors: false,
+                            callbacks: {
+                                label: context => `Revenue: $${context.parsed.y}K`
+                            }
+                        }
+                    }
+                }
+            });
+            
+            ChartManager.addChart('revenueTrend', state.charts.revenueTrend);
         }
     }
     
